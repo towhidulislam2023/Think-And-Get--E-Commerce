@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { getProducts, getDiscountPrice } from "../../helpers/product";
 import { addToWishlist } from "../../store/slices/wishlist-slice";
+import PostUi from "../../pages/PostUi/PostUi";
 
 const AllProducts = ({ limit }) => {
     const { products } = useSelector((state) => state.product);
@@ -21,19 +22,22 @@ const AllProducts = ({ limit }) => {
                     <div className="col-12">
                         {/* section title */}
                         <h2 className="section-title space-mb--20">
-                            All Products
+                            All Products 
                         </h2>
                         {/* featured products */}
                         <div className="all-products-wrapper space-mb-m--20">
                             <div className="row">
                                 {prods.map((single) => {
+                                    console.log(single);
                                     const wishlistItem = wishlistItems.find(
                                         (wishlistItem) =>
                                             wishlistItem.id === single.id
                                     );
                                     return (
                                         <div className="col-6" key={single.id}>
-                                            <div className="grid-product space-mb--20">
+                                            <PostUi key={single.id} wishlistItem={wishlistItem} single={single} ></PostUi>
+
+                                            {/* <div className="grid-product space-mb--20">
                                                 <div className="grid-product__image">
                                                     <Link
                                                         to={
@@ -119,7 +123,7 @@ const AllProducts = ({ limit }) => {
                                                         )}
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     );
                                 })}
