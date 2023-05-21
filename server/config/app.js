@@ -1,0 +1,20 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+const { DB_PORT } = require("./secret");
+
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+// listen
+app.listen(DB_PORT, () => {
+    console.log("Server listening on port " + DB_PORT);
+});
+
+module.exports = Object.freeze({
+    app,
+});
