@@ -1,14 +1,14 @@
-const { db, app } = require("../config");
+const { app, ExecuteQuery } = require("../config");
 
-app.get("/management/get-lv-name", (req, res) => {
-    const sqlSelect = `
+app.get("/lv-name", (req, res) => {
+    const query = ` 
     select 
        DISTINCT LV_name as value
-    from pre_defined_ship
-    ORDER BY LV_name ASC
+    from 
+        pre_defined_ship
+    ORDER BY 
+        LV_name ASC
     `;
-    db.query(sqlSelect, (err, result) => {
-        res.send(result);
-    });
-});
 
+    ExecuteQuery(res, query);
+});

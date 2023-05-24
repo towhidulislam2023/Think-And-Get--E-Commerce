@@ -2,11 +2,11 @@
 
 1. Install node modules.
    ```sh
-   yarn install
+   npm i
    ```
 2. Run the project.
    ```sh
-   yarn start
+   npm run start
    ```
 
 ## Show your support
