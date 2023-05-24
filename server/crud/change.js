@@ -1,14 +1,14 @@
 const { app, ExecuteQuery } = require("../config");
 
-const { change: JobEntryChange } = require("../api/job_entry");
+const { change: JobEntry } = require("../api/job_entry");
 
-const CHANGE_DATA = [...JobEntryChange];
+const CHANGE_DATA = [...JobEntry];
 
-CHANGE_DATA.forEach(({ uri, query, body, parm, msg }) => {
+CHANGE_DATA.forEach(({ uri, query, body, param, msg }) => {
     app.post(uri, (req, res) => {
-        let parmArr = [];
-        parm?.forEach((val) => {
-            parmArr.push(req?.params[val]);
+        let paramArr = [];
+        param?.forEach((val) => {
+            paramArr.push(req?.params[val]);
         });
 
         let bodyArr = [];
@@ -16,12 +16,10 @@ CHANGE_DATA.forEach(({ uri, query, body, parm, msg }) => {
             bodyArr.push(req?.body[val]);
         });
 
-        console.log(bodyArr);
-
         ExecuteQuery(
             res,
             query,
-            [...bodyArr, ...parmArr],
+            [...bodyArr, ...paramArr],
             "update",
             `${req?.params[msg]} updated successfully`
         );

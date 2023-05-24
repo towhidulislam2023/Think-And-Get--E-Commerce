@@ -4,8 +4,8 @@ const change = require("./change.js"); // Update
 const remove = require("./remove.js"); // Delete
 
 // module.exports = Object.freeze({
-//     create,
+//     add,
 //     read,
-//     update,
+//     change,
 //     remove,
 // });
