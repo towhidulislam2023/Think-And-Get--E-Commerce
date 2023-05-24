@@ -34,7 +34,7 @@ const AllProducts = ({ limit }) => {
                                             wishlistItem.id === single.id
                                     );
                                     return (
-                                        <div className="col-6" key={single.id}>
+                                        <div className="col-12 col-md-6" key={single.id}>
                                             <PostUi key={single.id} wishlistItem={wishlistItem} single={single} ></PostUi>
 
                                             {/* <div className="grid-product space-mb--20">
