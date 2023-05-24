@@ -1,8 +1,8 @@
 const { app, ExecuteQuery } = require("../config");
 
-const { read: JobEntryRead } = require("../api/job_entry");
+const { read: JobEntry } = require("../api/job_entry");
 
-const GET_DATA = [...JobEntryRead];
+const GET_DATA = [...JobEntry];
 
 GET_DATA.forEach(({ uri, query, param }) => {
     app.get(uri, (req, res) => {
@@ -11,11 +11,11 @@ GET_DATA.forEach(({ uri, query, param }) => {
             return;
         }
 
-        let parmArr = [];
+        let paramArr = [];
         param?.forEach((val) => {
-            parmArr.push(req?.params[val]);
+            paramArr.push(req?.params[val]);
         });
 
-        ExecuteQuery(res, query, [...parmArr]);
+        ExecuteQuery(res, query, [...paramArr]);
     });
 });

@@ -1,8 +1,8 @@
 const { app, ExecuteQuery } = require("../config");
 
-const { remove: JobEntryRemove } = require("../api/job_entry");
+const { remove: JobEntry } = require("../api/job_entry");
 
-const REMOVE_DATA = [...JobEntryRemove];
+const REMOVE_DATA = [...JobEntry];
 
 REMOVE_DATA.forEach(({ uri, query, param, msg }) => {
     app.delete(uri, (req, res) => {
