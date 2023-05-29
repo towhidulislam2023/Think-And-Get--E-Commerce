@@ -24,6 +24,7 @@ const PostUi = ({ single, wishlistItem }) => {
                                     </div> </Link>
                                 <p>10:04 pm <span>5/3/2023</span></p>
                             </div>
+                            
                         </div>
                         <div>
                             {/* <h6 className='text-center'>Rating</h6> */}
