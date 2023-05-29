@@ -37,7 +37,6 @@ const PostUi = ({ single, wishlistItem }) => {
                     </div>
                 </Card.Header>
                 <Card.Body>
-                    {/* <Card.Title> <h6> </h6>  </Card.Title> */}
                     <Card.Text>
                         <div className=''>
                             <p className='fs-6'> <span><FaShoppingCart></FaShoppingCart></span> Discount Offer: 29% off on all purchases</p>
