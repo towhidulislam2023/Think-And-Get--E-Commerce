@@ -1,8 +1,9 @@
 const { app, ExecuteQuery } = require("../config");
 
 const { read: JobEntry } = require("../api/job_entry");
+const { read: RecordEntry } = require("../api/record_entry");
 
-const GET_DATA = [...JobEntry];
+const GET_DATA = [...JobEntry, ...RecordEntry];
 
 GET_DATA.forEach(({ uri, query, param }) => {
     app.get(uri, (req, res) => {

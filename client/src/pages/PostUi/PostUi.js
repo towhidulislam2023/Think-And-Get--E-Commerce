@@ -6,19 +6,30 @@ import { FaClock, FaHeart, FaMapMarkerAlt, FaRegComment, FaShare, FaShoppingCart
 import { Link } from 'react-router-dom';
 const PostUi = ({ single, wishlistItem }) => {
     return (
-        <div className='grid-product space-mb--20'>
-            <Card className=''>
+        <div className="grid-product space-mb--20">
+            <Card className="">
                 <Card.Header>
+                    <div className=" d-flex align-items-center justify-content-between">
+                        <div className="d-flex gap-3 align-items-center">
+                            <img
+                                className=" rounded-circle sellerProfile"
+                                src="https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=900&t=st=1684680589~exp=1684681189~hmac=cafa5607e920ec2467a85bab709d5276befd391f36b7a89409199f11f28d0bde"
+                                alt=""
+                            />
                     <div className=' d-flex align-items-center justify-content-between'>
                         <div className='d-flex gap-3 align-items-center'>
                             <img className=' sellerProfile rounded-circle sellerProfile' src="https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=900&t=st=1684680589~exp=1684681189~hmac=cafa5607e920ec2467a85bab709d5276befd391f36b7a89409199f11f28d0bde" alt="" />
                             <div>
                                 <Link
                                     to={
-                                        process.env
-                                            .PUBLIC_URL +
+                                        process.env.PUBLIC_URL +
                                         `/product/${single.id}`
                                     }
+                                >
+                                    {" "}
+                                    <h4>Rafi Store</h4>
+                                </Link>
+                                <p>@rafiStore23</p>
                                 > <div className='d-flex '>
                                         <h4>Rafi Store</h4><p>@rafiStore23</p>
                                     </div> </Link>
@@ -66,7 +77,6 @@ const PostUi = ({ single, wishlistItem }) => {
                             <FaShare className='fs-4'></FaShare>
                         </div>
                     </div>
-
                 </Card.Body>
             </Card>
         </div>
