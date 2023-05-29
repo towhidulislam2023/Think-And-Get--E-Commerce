@@ -5,7 +5,6 @@ import "./postui.css"
 import { FaClock, FaHeart, FaMapMarkerAlt, FaRegComment, FaShare, FaShoppingCart, FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const PostUi = ({ single, wishlistItem }) => {
-    const { category, id } = single
     return (
         <div className='grid-product space-mb--20'>
             <Card className=''>
