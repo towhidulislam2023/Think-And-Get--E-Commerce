@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hasanm95/cogo-toast": "https://github.com/hasanm95/cogo-toast",
+    "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.1",
     "animate.css": "^4.1.1",
     "axios": "^1.2.1",
@@ -13,6 +14,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.44.3",
     "react-icons": "^4.7.1",
     "react-meta-tags": "^1.0.1",
     "react-redux": "^8.0.5",
@@ -22,7 +24,8 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "swiper": "^8.4.5",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
