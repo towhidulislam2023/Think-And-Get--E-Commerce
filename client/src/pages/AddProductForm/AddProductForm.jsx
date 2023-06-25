@@ -10,7 +10,7 @@ const AddProductForm = () => {
                         <div className="col-12">
                             <h3 className="auth-page-header__title">Welcome</h3>
                             <p className="auth-page-header__text">
-                                Add Your Product Now 
+                                Add Your Product  
                             </p>
                         </div>
                     </div>
