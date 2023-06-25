@@ -21,9 +21,9 @@ const AddProductForm = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            {/* Auth form is now there */}
+                            {/* Auth form is now theren for test  */}
                             <div className="auth-form">
-                                <form>
+                                {/* <form>
                                     <div className="auth-form__single-field space-mb--30">
                                         <label htmlFor="product_id">Product Id</label>
                                         <input
@@ -101,7 +101,7 @@ const AddProductForm = () => {
                                     </div>
                                     <div className="auth-form__single-field space-mb--30">
                                         <label htmlFor="product_ratting_count">
-                                            Product Ratting Count - test
+                                            Product Ratting Count - test-2
                                         </label>
                                         <input
                                             type="text"
@@ -193,7 +193,7 @@ const AddProductForm = () => {
                                     <button className="auth-form__button">
                                         Add Product
                                     </button>
-                                </form>
+                                </form> */}
                             </div>
                         </div>
                     </div>
