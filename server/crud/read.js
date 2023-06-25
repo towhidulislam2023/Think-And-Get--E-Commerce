@@ -1,21 +1,23 @@
 const { app, ExecuteQuery } = require("../config");
 
 const { read: JobEntry } = require("../api/job_entry");
+const { read: RecordEntry } = require("../api/record_entry");
+const { read: Auth } = require("../api/auth");
 
-const GET_DATA = [...JobEntry];
+const GET_DATA = [...JobEntry, ...Auth];
 
 GET_DATA.forEach(({ uri, query, param }) => {
-    app.get(uri, (req, res) => {
-        if (param === undefined) {
-            ExecuteQuery(res, query);
-            return;
-        }
+	app.get(uri, (req, res) => {
+		if (param === undefined) {
+			ExecuteQuery(res, query);
+			return;
+		}
 
-        let paramArr = [];
-        param?.forEach((val) => {
-            paramArr.push(req?.params[val]);
-        });
+		let paramArr = [];
+		param?.forEach((val) => {
+			paramArr.push(req?.params[val]);
+		});
 
-        ExecuteQuery(res, query, [...paramArr]);
-    });
+		ExecuteQuery(res, query, [...paramArr]);
+	});
 });

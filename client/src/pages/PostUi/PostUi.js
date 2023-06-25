@@ -1,10 +1,19 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import "./postui.css"
-import { FaClock, FaHeart, FaMapMarkerAlt, FaRegComment, FaShare, FaShoppingCart, FaStar } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import {
+	FaClock,
+	FaHeart,
+	FaMapMarkerAlt,
+	FaRegComment,
+	FaShare,
+	FaShoppingCart,
+	FaStar,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import "./postui.css";
 const PostUi = ({ single, wishlistItem }) => {
+
     return (
         <div className='grid-product space-mb--20'>
             <Card className=''>
@@ -43,35 +52,33 @@ const PostUi = ({ single, wishlistItem }) => {
                             <p className='mt-3'> <span><FaClock></FaClock></span> Duration: This offer is valid from [start date] to [end date].</p>
                             <p className='fs-6'> <span><FaMapMarkerAlt></FaMapMarkerAlt></span>   Location: Groceress Shop outlets nationwide</p>
 
-                        </div>
-                    </Card.Text>
 
-                    <hr />
-                    <div className='d-flex justify-content-between'>
-                        <div  className='d-flex flex-column align-items-center justify-content-center'>
-                            <div className='ms-1'>
-                                <p>200 Likes</p>
-                            </div>
-                            <FaHeart className='fs-4 text-danger text-center '></FaHeart>
-                        </div>
-                        <div className='d-flex flex-column align-items-center justify-content-center'>
-                            <div>
-                                <p>30 comments</p>
-                            </div>
-                            <FaRegComment className='fs-4'> </FaRegComment>
-                        </div>
+					<hr />
+					<div className="d-flex justify-content-between">
+						<div className="d-flex flex-column align-items-center justify-content-center">
+							<div className="ms-1">
+								<p>200 Likes</p>
+							</div>
+							<FaHeart className="fs-4 text-danger text-center "></FaHeart>
+						</div>
+						<div className="d-flex flex-column align-items-center justify-content-center">
+							<div>
+								<p>30 comments</p>
+							</div>
+							<FaRegComment className="fs-4"> </FaRegComment>
+						</div>
 
-                        <div className='d-flex flex-column align-items-center justify-content-center'>
-                            <div>
-                                <p>12 share</p></div>
-                            <FaShare className='fs-4'></FaShare>
-                        </div>
-                    </div>
-
-                </Card.Body>
-            </Card>
-        </div>
-    );
+						<div className="d-flex flex-column align-items-center justify-content-center">
+							<div>
+								<p>12 share</p>
+							</div>
+							<FaShare className="fs-4"></FaShare>
+						</div>
+					</div>
+				</Card.Body>
+			</Card>
+		</div>
+	);
 };
 
 export default PostUi;

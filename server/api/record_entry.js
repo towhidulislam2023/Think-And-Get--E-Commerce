@@ -1,5 +1,9 @@
 const { app, ExecuteQuery } = require("../config");
 
+const read =[
+
+];
+
 app.get("/lv-name", (req, res) => {
     const query = ` 
     select 
