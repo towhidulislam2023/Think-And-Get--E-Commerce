@@ -3,7 +3,7 @@ import React from 'react';
 const AddProductForm = () => {
     return (
         <div className="body-wrapper bg-color--gradient space-pt--70 space-pb--120 mt-3">
-            {/* auth page header */}
+            {/* auth page header is there noww */}
             <div className="auth-page-header space-mb--50">
                 <div className="container">
                     <div className="row">
