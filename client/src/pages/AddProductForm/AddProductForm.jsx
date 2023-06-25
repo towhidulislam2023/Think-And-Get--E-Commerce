@@ -3,7 +3,7 @@ import React from 'react';
 const AddProductForm = () => {
     return (
         <div className="body-wrapper bg-color--gradient space-pt--70 space-pb--120 mt-3">
-            {/* auth page header is there noww */}
+            {/* auth page header  */}
             <div className="auth-page-header space-mb--50">
                 <div className="container">
                     <div className="row">
@@ -21,7 +21,7 @@ const AddProductForm = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            {/* Auth form */}
+                            {/* Auth form is now there */}
                             <div className="auth-form">
                                 <form>
                                     <div className="auth-form__single-field space-mb--30">
@@ -101,7 +101,7 @@ const AddProductForm = () => {
                                     </div>
                                     <div className="auth-form__single-field space-mb--30">
                                         <label htmlFor="product_ratting_count">
-                                            Product Ratting Count
+                                            Product Ratting Count - test
                                         </label>
                                         <input
                                             type="text"
