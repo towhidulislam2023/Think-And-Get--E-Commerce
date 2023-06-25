@@ -23,7 +23,7 @@ const AddProductForm = () => {
                         <div className="col-12">
                             {/* Auth form is now theren for test  */}
                             <div className="auth-form">
-                                <form>
+                                {/* <form>
                                     <div className="auth-form__single-field space-mb--30">
                                         <label htmlFor="product_id">Product Id</label>
                                         <input
@@ -193,7 +193,7 @@ const AddProductForm = () => {
                                     <button className="auth-form__button">
                                         Add Product
                                     </button>
-                                </form>
+                                </form> */}
                             </div>
                         </div>
                     </div>
