@@ -10,7 +10,7 @@ const AddProductForm = () => {
                         <div className="col-12">
                             <h3 className="auth-page-header__title">Welcome</h3>
                             <p className="auth-page-header__text">
-                                Add Your Product  
+                                Add Your Productv - Hello 03
                             </p>
                         </div>
                     </div>
@@ -46,7 +46,7 @@ const AddProductForm = () => {
                                     </div>
                                     <div className="auth-form__single-field space-mb--30">
                                         <label htmlFor="product_price">
-                                            Product Price
+                                            Product Price 
                                         </label>
                                         <input
                                             type="text"
