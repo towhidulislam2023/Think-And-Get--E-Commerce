@@ -51,7 +51,8 @@ const PostUi = ({ single, wishlistItem }) => {
                             <p className='fs-6'> <span><FaShoppingCart></FaShoppingCart></span> Discount Offer: 29% off on all purchases</p>
                             <p className='mt-3'> <span><FaClock></FaClock></span> Duration: This offer is valid from [start date] to [end date].</p>
                             <p className='fs-6'> <span><FaMapMarkerAlt></FaMapMarkerAlt></span>   Location: Groceress Shop outlets nationwide</p>
-
+                        </div>
+                    </Card.Text>
 
 					<hr />
 					<div className="d-flex justify-content-between">
