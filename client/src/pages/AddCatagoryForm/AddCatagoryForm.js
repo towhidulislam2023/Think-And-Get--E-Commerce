@@ -36,18 +36,34 @@ const AddcategoryForm = () => {
 
 	// file upload
 	const [categoryImage, setCategoryImage] = useState(null);
-	const [categoryImageName, setCategoryImageName] = useState("");
 
 	const handleCategoryImage = (e) => {
 		const file = e.target.files[0];
 		if (file) {
 			setCategoryImage(file);
-			setCategoryImageName(file.name);
 		}
 	};
 
-	const onSubmit = (data) => {
-		console.log("FormData", categoryImageName);
+	const onSubmit = async (data) => {
+		let formData = new FormData();
+		formData.append("uploadFiles", categoryImage);
+		var categoryImageName = null;
+
+		await Axios.post(
+			`${process.env.REACT_APP_API_URL}/imageUpload/uploadcategoryimage`,
+			formData,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data;",
+				},
+			}
+		).then((response) => {
+			console.log(response.data);
+			if (response.data.msg === "File Uploaded") {
+				categoryImageName = response.data.categoryImage;
+			}
+		});
+
 		Axios.post(`${process.env.REACT_APP_API_URL}/category/addcategory`, {
 			name: data.category_name,
 			image: categoryImageName,
