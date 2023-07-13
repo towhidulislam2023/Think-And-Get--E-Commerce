@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2023 at 03:58 PM
+-- Generation Time: Jul 13, 2023 at 09:48 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -30,9 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `url`) VALUES
+(1, 'gg', 'https://www.google.com'),
+(2, 'Another', 'https://www.google.com'),
+(3, 'gg 2', 'https://www.google.com'),
+(12, 'gg 3', 'https://www.google.com'),
+(13, 'Shoe', 'https://www.google.com'),
+(14, 'Bag', 'https://www.google.com');
 
 -- --------------------------------------------------------
 
@@ -56,6 +67,16 @@ CREATE TABLE `customer_profile` (
   `review_count` int(11) DEFAULT NULL,
   `offer` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer_profile`
+--
+
+INSERT INTO `customer_profile` (`id`, `name`, `image`, `point`, `level`, `user_name`, `password`, `phone`, `email`, `shipping_address`, `total_order`, `to_be_shipped`, `review_count`, `offer`) VALUES
+(1, 'hasib', '[value-3]', '[value-4]', '[value-5]', 'hasibarrafiulfahim', 'hasib1234', '[value-8]', 'hasibarrafiulfahim@gmail.com', '[value-10]', 0, 0, 0, '[value-14]'),
+(2, 'Rashik Buksh', NULL, NULL, NULL, NULL, 'rafsan123', NULL, 'rashikbuksh@gmail.com', NULL, NULL, NULL, NULL, NULL),
+(3, 'Buksh', NULL, NULL, NULL, 'buksh', 'rafsan123', '01684545111', 'rashik@gmail.com', '730/5/1, Block-C, Khilgaon, Dhaka', 1, 2, 3, 'no'),
+(6, 'Rashik Buksh', NULL, NULL, NULL, 'rbr', 'rafsan123', '01709305072', 'rbr@gmail.com', '730/5/1, Block-C, Khilgaon, Dhaka', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,33 +131,35 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `sku` varchar(255) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `discount` int(11) DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `sale_count` int(11) DEFAULT NULL,
-  `wishlist_count` int(11) DEFAULT NULL,
-  `rating_count` int(11) DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
-  `variation` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `gallary_image` varchar(255) DEFAULT NULL,
   `short_description` varchar(100) DEFAULT NULL,
   `full_description` varchar(255) DEFAULT NULL,
-  `shop_id` int(11) DEFAULT NULL,
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `sku`, `name`, `image`, `short_description`, `full_description`, `category_id`) VALUES
+(1, NULL, 'gg product', 'Welcome Scan.jpg', '10', '10', 3),
+(11, NULL, 'gg 8', '1689276807795__Welcome Scan.jpg', '10', '1010', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `variation_images`
+-- Table structure for table `shopper_product`
 --
 
-CREATE TABLE `variation_images` (
+CREATE TABLE `shopper_product` (
   `id` int(11) NOT NULL,
-  `color` varchar(100) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL,
+  `discount` int(11) NOT NULL,
+  `product_count` int(11) NOT NULL,
+  `sale_count` int(11) NOT NULL,
+  `wishlist_count` int(11) NOT NULL,
+  `rating_count` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -183,10 +206,10 @@ ALTER TABLE `product`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Indexes for table `variation_images`
+-- Indexes for table `shopper_product`
 --
-ALTER TABLE `variation_images`
-  ADD PRIMARY KEY (`id`,`product_id`),
+ALTER TABLE `shopper_product`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
 --
@@ -197,13 +220,13 @@ ALTER TABLE `variation_images`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `customer_profile`
 --
 ALTER TABLE `customer_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `hero_slider`
@@ -227,12 +250,12 @@ ALTER TABLE `order`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `variation_images`
+-- AUTO_INCREMENT for table `shopper_product`
 --
-ALTER TABLE `variation_images`
+ALTER TABLE `shopper_product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -252,10 +275,10 @@ ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
--- Constraints for table `variation_images`
+-- Constraints for table `shopper_product`
 --
-ALTER TABLE `variation_images`
-  ADD CONSTRAINT `variation_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+ALTER TABLE `shopper_product`
+  ADD CONSTRAINT `shopper_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

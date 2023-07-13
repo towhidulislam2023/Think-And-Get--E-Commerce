@@ -9,24 +9,11 @@ const AddProductForm = () => {
 
 	// file upload
 	const [Image, setImage] = useState(null);
-	const [ImageName, setImageName] = useState("");
-
-	const [GallaryImage, setGallaryImage] = useState(null);
-	const [GallaryImageName, setGallaryImageName] = useState("");
 
 	const handleImage = (e) => {
 		const file = e.target.files[0];
 		if (file) {
 			setImage(file);
-			setImageName(file.name);
-		}
-	};
-
-	const handleGalleryImage = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			setGallaryImage(file);
-			setGallaryImageName(file.name);
 		}
 	};
 
@@ -40,30 +27,9 @@ const AddProductForm = () => {
 
 	const addProductScema = yup.object({
 		name: yup.string().required("Name required"),
-		price: yup
-			.number("price must be number")
-			.transform((value) => (isNaN(value) ? undefined : value))
-			.required("price required"),
-		discount: yup
-			.number("discount must be number")
-			.transform((value) => (isNaN(value) ? undefined : value))
-			.required("Discount ID required"),
-		// gallery_image: yup.string().required("gallery_image required"),
 		short_description: yup.string().required("short_description required"),
 		full_description: yup.string().required("full_description required"),
-		shop_id: yup.string().required("shop_id required"),
-		variation: yup.string().required("variation required"),
 		image: yup
-			.mixed()
-			.required("Category Picture is required")
-			.test("fileFormat", "Invalid file format", (value) => {
-				if (value && value.length) {
-					const file = value[0];
-					return file && file.type.includes("image");
-				}
-				return false;
-			}),
-		gallery_image: yup
 			.mixed()
 			.required("Category Picture is required")
 			.test("fileFormat", "Invalid file format", (value) => {
@@ -77,18 +43,9 @@ const AddProductForm = () => {
 	const form = useForm({
 		defaultValues: {
 			name: "",
-			price: "",
-			discount: "",
-			rating: "",
-			sale_count: "0",
-			wishlist_count: "0",
-			rating_count: "0",
-			variation: "",
 			image: "",
-			gallery_image: "",
 			short_description: "",
 			full_description: "",
-			shop_id: "",
 			category_id: "",
 		},
 		resolver: yupResolver(addProductScema),
@@ -102,26 +59,37 @@ const AddProductForm = () => {
 		form.setValue("category_id", e.target.value);
 	};
 
-	const onSubmit = (data) => {
-		console.log("FormData", data);
-		console.log(errors);
+	const onSubmit = async (data) => {
+		const formData = new FormData();
+		formData.append("uploadFiles", Image);
+
+		var ImageName = null;
+
+		await Axios.post(
+			`${process.env.REACT_APP_API_URL}/imageUpload/uploadproductimage`,
+			formData,
+			{
+				headers: {
+					"Content-Type": "multipart/form-data;",
+				},
+			}
+		).then((response) => {
+			console.log(response.data);
+			if (response.data.msg === "File Uploaded") {
+				ImageName = response.data.productImage;
+			}
+		});
+
 		Axios.post(`${process.env.REACT_APP_API_URL}/product/addproduct`, {
 			name: data.name,
-			price: data.price,
-			discount: data.discount,
-			rating: Number(data.rating),
-			sale_count: 0,
-			wishlist_count: 0,
-			rating_count: 0,
-			variation: data.variation,
 			image: ImageName,
-			gallery_image: GallaryImageName,
 			short_description: data.short_description,
 			full_description: data.full_description,
-			shop_id: Number(data.shop_id),
 			category_id: Number(data.category_id),
 		}).then((response) => {
-			console.log(response.data);
+			if (response.data.message === data.name + " added successfully") {
+				alert("Product Added Successful");
+			}
 		});
 	};
 	return (
@@ -162,50 +130,6 @@ const AddProductForm = () => {
 									</div>
 
 									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="price">Price</label>
-										<input
-											{...register("price")}
-											type="number"
-											name="price"
-											id="price"
-											placeholder="Enter Price"
-										/>
-										<p className="text-danger">
-											{errors.price?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="discount">
-											Discount
-										</label>
-										<input
-											{...register("discount")}
-											type="number"
-											name="discount"
-											id="discount"
-											placeholder="Enter Discount"
-										/>
-										<p className="text-danger">
-											{errors.discount?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="rating">Rating</label>
-										<input
-											{...register("rating")}
-											type="number"
-											name="rating"
-											id="rating"
-											placeholder="Enter Rating"
-										/>
-										<p className="text-danger">
-											{errors.rating?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
 										<label htmlFor="category">
 											Category
 										</label>
@@ -236,22 +160,6 @@ const AddProductForm = () => {
 									</div>
 
 									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="variation">
-											Variation
-										</label>
-										<input
-											{...register("variation")}
-											type="text"
-											name="variation"
-											id="variation"
-											placeholder="Enter Variation"
-										/>
-										<p className="text-danger">
-											{errors.variation?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
 										<label htmlFor="image">Image</label>
 										<input
 											{...register("image")}
@@ -263,23 +171,6 @@ const AddProductForm = () => {
 										/>
 										<p className="text-danger">
 											{errors.image?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="gallery_image">
-											Gallery Image
-										</label>
-										<input
-											{...register("gallery_image")}
-											type="file"
-											name="gallery_image"
-											id="gallery_image"
-											accept="image/*"
-											onChange={handleGalleryImage}
-										/>
-										<p className="text-danger">
-											{errors.gallery_image?.message}
 										</p>
 									</div>
 
@@ -312,20 +203,6 @@ const AddProductForm = () => {
 										/>
 										<p className="text-danger">
 											{errors.full_description?.message}
-										</p>
-									</div>
-
-									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="shop_id">Shop ID</label>
-										<input
-											{...register("shop_id")}
-											type="text"
-											name="shop_id"
-											id="shop_id"
-											placeholder="Enter Shop ID"
-										/>
-										<p className="text-danger">
-											{errors.shop_id?.message}
 										</p>
 									</div>
 

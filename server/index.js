@@ -3,8 +3,8 @@ const crud = require("./crud");
 const { app } = require("./config/app");
 
 const multer = require("multer");
-const category = require("./api/category");
-var categoryImage = null;
+
+var productImage = null;
 
 const storage = multer.diskStorage({
 	destination: (req, file, callBack) => {
@@ -14,24 +14,24 @@ const storage = multer.diskStorage({
 	},
 	filename: (req, file, callBack) => {
 		if (file.mimetype.substring(0, 5) == "image") {
-			categoryImage = Date.now() + "__" + file.originalname;
-			callBack(null, categoryImage);
+			productImage = Date.now() + "__" + file.originalname;
+			callBack(null, productImage);
 		}
 	},
 });
 const upload = multer({ storage: storage });
 
 app.post(
-	"/imageUpload/uploadcategoryimage",
+	"/imageUpload/uploadproductimage",
 	upload.array("uploadFiles"),
 	(req, res) => {
 		if (req.files === null) {
 			return res.status(400).json({ msg: "No file uploaded" });
 		} else {
-			console.log(categoryImage);
+			console.log(productImage);
 			return res
 				.status(200)
-				.json({ msg: "File Uploaded", categoryImage });
+				.json({ msg: "File Uploaded", productImage });
 		}
 	}
 );

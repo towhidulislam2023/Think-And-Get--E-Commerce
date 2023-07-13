@@ -1,8 +1,8 @@
 const add = [
 	{
 		uri: "/category/addcategory",
-		query: `INSERT INTO category (name, image, url) VALUES (?, ?, ?)`,
-		body: ["name", "image", "url"],
+		query: `INSERT INTO category (name, url) VALUES (?, ?)`,
+		body: ["name", "url"],
 		msg: "name",
 	},
 ];
