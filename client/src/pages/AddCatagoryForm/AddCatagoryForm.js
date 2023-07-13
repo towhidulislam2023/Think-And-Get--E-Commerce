@@ -7,16 +7,6 @@ import * as yup from "yup";
 const AddcategoryForm = () => {
 	const addcategoryScema = yup.object({
 		category_name: yup.string().required("Category name required"),
-		category_picture: yup
-			.mixed()
-			.required("Category Picture is required")
-			.test("fileFormat", "Invalid file format", (value) => {
-				if (value && value.length) {
-					const file = value[0];
-					return file && file.type.includes("image");
-				}
-				return false;
-			}),
 		category_url: yup
 			.string()
 			.url("Invalid URL format")
@@ -25,7 +15,6 @@ const AddcategoryForm = () => {
 	const form = useForm({
 		defaultValues: {
 			category_name: "",
-			category_picture: "",
 			category_url: "",
 		},
 		resolver: yupResolver(addcategoryScema),
@@ -45,28 +34,8 @@ const AddcategoryForm = () => {
 	};
 
 	const onSubmit = async (data) => {
-		let formData = new FormData();
-		formData.append("uploadFiles", categoryImage);
-		var categoryImageName = null;
-
-		await Axios.post(
-			`${process.env.REACT_APP_API_URL}/imageUpload/uploadcategoryimage`,
-			formData,
-			{
-				headers: {
-					"Content-Type": "multipart/form-data;",
-				},
-			}
-		).then((response) => {
-			console.log(response.data);
-			if (response.data.msg === "File Uploaded") {
-				categoryImageName = response.data.categoryImage;
-			}
-		});
-
 		Axios.post(`${process.env.REACT_APP_API_URL}/category/addcategory`, {
 			name: data.category_name,
-			image: categoryImageName,
 			url: data.category_url,
 		}).then((response) => {
 			console.log(response.data);
@@ -114,22 +83,6 @@ const AddcategoryForm = () => {
 										/>
 										<p className="text-danger">
 											{errors.category_id?.message}
-										</p>
-									</div>
-									<div className="auth-form__single-field space-mb--30">
-										<label htmlFor="category_picture">
-											Category Picture
-										</label>
-										<input
-											{...register("category_picture")}
-											type="file"
-											name="category_picture"
-											id="category_picture"
-											placeholder="Enter category Picture"
-											onChange={handleCategoryImage}
-										/>
-										<p className="text-danger">
-											{errors.category_picture?.message}
 										</p>
 									</div>
 									<div className="auth-form__single-field space-mb--30">
