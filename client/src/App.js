@@ -11,6 +11,7 @@ import { Preloader } from "./components";
 import ScrollToTop from "./helpers/scroll-top";
 import AddCatagoryForm from "./pages/AddCatagoryForm/AddCatagoryForm";
 import AddProductForm from "./pages/AddProductForm/AddProductForm";
+import ShopperProduct from "./pages/shopperProduct/shopperProduct";
 
 const Welcome = lazy(() => import("./pages/Welcome"));
 const Register = lazy(() => import("./pages/Register"));
@@ -82,8 +83,8 @@ function App() {
                             />
                             {/* TODO: Delete This After Work done  */}
                             <Route
-                                path={process.env.PUBLIC_URL + "/addcategory"}
-                                element={<AddCatagoryForm></AddCatagoryForm>}
+                                path={process.env.PUBLIC_URL + "/ShopperProduct"}
+                                element={<ShopperProduct></ShopperProduct>}
                             />
                             <Route
                                 path={process.env.PUBLIC_URL + "/addproduct"}
