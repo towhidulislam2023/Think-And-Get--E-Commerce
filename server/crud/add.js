@@ -8,7 +8,15 @@ const { add: Category } = require("../api/category");
 
 const { add: Product } = require("../api/product");
 
-const ADD_DATA = [...JobEntry, ...Auth, ...Category, ...Product];
+const { add: ShopperProduct } = require("../api/shopperproduct");
+
+const ADD_DATA = [
+	...JobEntry,
+	...Auth,
+	...Category,
+	...Product,
+	...ShopperProduct,
+];
 
 ADD_DATA.forEach(({ uri, query, body, msg }) => {
 	app.post(uri, (req, res) => {
