@@ -31,7 +31,11 @@ const Register = () => {
 			email: data.emailAddress,
 			password: data.password,
 		}).then((response) => {
-			console.log(response);
+			console.log(response.data);
+			if (response.data.message === data.name + " added successfully") {
+				alert("Registration Successful");
+				window.location.href = "/login";
+			}
 		});
 	};
 

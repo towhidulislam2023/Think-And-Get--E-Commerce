@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
-import { default as React, useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
@@ -32,6 +32,15 @@ const Login = () => {
 			`${process.env.REACT_APP_API_URL}/auth/verify_login/${data?.emailAddress}/${data?.password}`
 		).then((response) => {
 			console.log(response.data);
+			// redirect to home page
+			console.log(response.data[0]?.id);
+			if (response.data[0]?.id === undefined) {
+				alert("Invalid Credentials");
+				window.location.href = "/login";
+			} else {
+				localStorage.setItem("user-id", response.data[0]?.id);
+				window.location.href = "/home";
+			}
 		});
 	};
 
