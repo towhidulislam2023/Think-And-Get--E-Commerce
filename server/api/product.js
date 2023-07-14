@@ -13,7 +13,15 @@ const add = [
 	},
 ];
 
+const read = [
+	{
+		uri: "/product/getproduct",
+		query: `SELECT id,name FROM product`,
+	},
+];
+
 // Export modules
 module.exports = Object.freeze({
 	add,
+	read,
 });

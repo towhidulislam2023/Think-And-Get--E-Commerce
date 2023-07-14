@@ -23,16 +23,6 @@ const AddcategoryForm = () => {
 	const { register, handleSubmit, formState } = form;
 	const { errors } = formState;
 
-	// file upload
-	const [categoryImage, setCategoryImage] = useState(null);
-
-	const handleCategoryImage = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			setCategoryImage(file);
-		}
-	};
-
 	const onSubmit = async (data) => {
 		Axios.post(`${process.env.REACT_APP_API_URL}/category/addcategory`, {
 			name: data.category_name,
