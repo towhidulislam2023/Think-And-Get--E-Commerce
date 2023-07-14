@@ -3,8 +3,10 @@ const { app, ExecuteQuery } = require("../config");
 const { read: JobEntry } = require("../api/job_entry");
 const { read: RecordEntry } = require("../api/record_entry");
 const { read: Auth } = require("../api/auth");
+const { read: Profile } = require("../api/profile");
+const { read: Category } = require("../api/category");
 
-const GET_DATA = [...JobEntry, ...Auth];
+const GET_DATA = [...JobEntry, ...Auth, ...Profile, ...Category];
 
 GET_DATA.forEach(({ uri, query, param }) => {
 	app.get(uri, (req, res) => {

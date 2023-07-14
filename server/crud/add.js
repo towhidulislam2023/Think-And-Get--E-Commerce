@@ -4,7 +4,11 @@ const { add: JobEntry } = require("../api/job_entry");
 
 const { add: Auth } = require("../api/auth");
 
-const ADD_DATA = [...JobEntry, ...Auth];
+const { add: Category } = require("../api/category");
+
+const { add: Product } = require("../api/product");
+
+const ADD_DATA = [...JobEntry, ...Auth, ...Category, ...Product];
 
 ADD_DATA.forEach(({ uri, query, body, msg }) => {
 	app.post(uri, (req, res) => {
