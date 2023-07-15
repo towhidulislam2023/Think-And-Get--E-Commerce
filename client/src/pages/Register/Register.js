@@ -30,6 +30,7 @@ const Register = () => {
 			name: data.name,
 			email: data.emailAddress,
 			password: data.password,
+			access: "customer",
 		}).then((response) => {
 			console.log(response.data);
 			if (response.data.message === data.name + " added successfully") {
