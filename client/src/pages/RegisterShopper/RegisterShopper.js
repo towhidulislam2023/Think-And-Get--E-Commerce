@@ -1,13 +1,28 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import Axios from "axios";
 import React from "react";
-import { useForm } from "react-hook-form";
+import Button from "react-bootstrap/esm/Button";
+import { set, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import * as yup from "yup";
 
-const Login = () => {
-	const loginSchema = yup.object().shape({
+const Register = () => {
+	const getUserLocation = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+	};
+
+	const [address, setAddress] = React.useState("");
+
+	const showPosition = (position) => {
+		setAddress(position.coords.latitude + "__" + position.coords.longitude);
+	};
+	const registerSchema = yup.object().shape({
+		name: yup.string().required("Name is required"),
 		emailAddress: yup
 			.string()
 			.email("Please enter valid email address")
@@ -16,30 +31,30 @@ const Login = () => {
 			.string()
 			.min(8, "Password must be at least 8 characters")
 			.required("Password is required"),
+		shippingaddress: yup
+			.string()
+			.min(3, "Shipping Address must be at least 10 characters"),
 	});
 
 	const { register, handleSubmit, formState } = useForm({
-		resolver: yupResolver(loginSchema),
+		resolver: yupResolver(registerSchema),
 	});
 
 	const { errors } = formState;
 
 	const onSubmit = (data) => {
-		// console.log(data.emailAddress);
-		// console.log(data.password);
-		// console.log(process.env.REACT_APP_API_URL);
-		Axios.get(
-			`${process.env.REACT_APP_API_URL}/auth/verify_login/${data?.emailAddress}/${data?.password}`
-		).then((response) => {
+		console.log(data);
+		Axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
+			name: data.name,
+			email: data.emailAddress,
+			password: data.password,
+			access: "shopper",
+			shippingaddress: data.shippingaddress,
+		}).then((response) => {
 			console.log(response.data);
-			// redirect to home page
-			console.log(response.data[0]?.id);
-			if (response.data[0]?.id === undefined) {
-				alert("Invalid Credentials");
+			if (response.data.message === data.name + " added successfully") {
+				alert("Registration Successful");
 				window.location.href = "/login";
-			} else {
-				localStorage.setItem("user-id", response.data[0]?.id);
-				window.location.href = "/home";
 			}
 		});
 	};
@@ -51,11 +66,10 @@ const Login = () => {
 				<div className="container">
 					<div className="row">
 						<div className="col-12">
-							<h3 className="auth-page-header__title">
-								Welcome Back
-							</h3>
+							<h3 className="auth-page-header__title">Welcome</h3>
 							<p className="auth-page-header__text">
-								Log in for best shopping
+								Don't have account? <br /> Please sign up for
+								creating a new account.
 							</p>
 						</div>
 					</div>
@@ -70,14 +84,27 @@ const Login = () => {
 							<div className="auth-form">
 								<form onSubmit={handleSubmit(onSubmit)}>
 									<div className="auth-form__single-field space-mb--30">
+										<label htmlFor="name">Name</label>
+										<input
+											type="text"
+											name="name"
+											id="name"
+											placeholder="Enter Full name"
+											{...register("name")}
+										/>
+										<p className="text-danger">
+											{errors.name?.message}
+										</p>
+									</div>
+									<div className="auth-form__single-field space-mb--30">
 										<label htmlFor="emailAddress">
 											Email Address
 										</label>
 										<input
 											type="text"
-											id="emailAddress"
-											className="w-full rounded-sm border-none border-transparent pl-2 outline-none focus:border-transparent focus:ring-0"
 											name="emailAddress"
+											id="emailAddress"
+											placeholder="Enter Email Address"
 											{...register("emailAddress")}
 										/>
 										<p className="text-danger">
@@ -90,36 +117,47 @@ const Login = () => {
 										</label>
 										<input
 											type="password"
-											id="password"
-											className="w-full rounded-sm border-none border-transparent pl-2 outline-none focus:border-transparent focus:ring-0"
 											name="password"
+											id="password"
+											placeholder="Enter Password"
 											{...register("password")}
 										/>
 										<p className="text-danger">
 											{errors.password?.message}
 										</p>
 									</div>
+									<div className="auth-form__single-field space-mb--30">
+										<label htmlFor="name">
+											Shop Location
+										</label>
+										<input
+											type="text"
+											name="shippingaddress"
+											id="shippingaddress"
+											placeholder="Enter your Shop Location"
+											{...register("shippingaddress")}
+											value={address}
+										/>
+										<p className="text-danger">
+											{errors.shippingaddress?.message}
+										</p>
+										<button
+											type="button"
+											onClick={getUserLocation}
+										>
+											Get Location
+										</button>
+									</div>
 									<div className="auth-form__single-field space-mb--40">
 										<p className="auth-form__info-text">
-											Sign up as a Customer?{" "}
+											Already have an account?{" "}
 											<Link
 												to={
 													process.env.PUBLIC_URL +
-													"/register"
+													"/login"
 												}
 											>
-												Sign up Now
-											</Link>
-										</p>
-										<p className="auth-form__info-text">
-											Sign up as a Shopper?{" "}
-											<Link
-												to={
-													process.env.PUBLIC_URL +
-													"/registershopper"
-												}
-											>
-												Sign up Now
+												Sign in Now
 											</Link>
 										</p>
 									</div>
@@ -127,7 +165,7 @@ const Login = () => {
 										type="submit"
 										className="auth-form__button"
 									>
-										Login
+										Sign Up
 									</button>
 								</form>
 							</div>
@@ -171,4 +209,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Register;
