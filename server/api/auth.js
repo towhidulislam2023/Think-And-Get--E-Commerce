@@ -16,8 +16,8 @@ const add = [
 	},
 	{
 		uri: "/auth/registershopper",
-		query: `INSERT INTO customer_profile (name, email, password, shippingaddress, access) VALUES (?, ?, ?, ?, ?)`,
-		body: ["name", "email", "password", "shippingaddress", "access"],
+		query: `INSERT INTO customer_profile (name, email, password, shipping_address, access) VALUES (?, ?, ?, ?, ?)`,
+		body: ["name", "email", "password", "shipping_address", "access"],
 		msg: "name",
 	},
 ];

@@ -31,7 +31,7 @@ const Register = () => {
 			.string()
 			.min(8, "Password must be at least 8 characters")
 			.required("Password is required"),
-		shippingaddress: yup
+		shipping_address: yup
 			.string()
 			.min(3, "Shipping Address must be at least 10 characters"),
 	});
@@ -44,12 +44,12 @@ const Register = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-		Axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
+		Axios.post(`${process.env.REACT_APP_API_URL}/auth/registershopper`, {
 			name: data.name,
 			email: data.emailAddress,
 			password: data.password,
 			access: "shopper",
-			shippingaddress: data.shippingaddress,
+			shipping_address: data.shipping_address,
 		}).then((response) => {
 			console.log(response.data);
 			if (response.data.message === data.name + " added successfully") {
@@ -132,14 +132,14 @@ const Register = () => {
 										</label>
 										<input
 											type="text"
-											name="shippingaddress"
-											id="shippingaddress"
+											name="shipping_address"
+											id="shipping_address"
 											placeholder="Enter your Shop Location"
-											{...register("shippingaddress")}
+											{...register("shipping_address")}
 											value={address}
 										/>
 										<p className="text-danger">
-											{errors.shippingaddress?.message}
+											{errors.shipping_address?.message}
 										</p>
 										<button
 											type="button"
