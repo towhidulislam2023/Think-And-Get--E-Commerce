@@ -6,8 +6,16 @@ const { read: Auth } = require("../api/auth");
 const { read: Profile } = require("../api/profile");
 const { read: Category } = require("../api/category");
 const { read: Product } = require("../api/product");
+const { read: ShopperProduct } = require("../api/shopperproduct");
 
-const GET_DATA = [...JobEntry, ...Auth, ...Profile, ...Category, ...Product];
+const GET_DATA = [
+	...JobEntry,
+	...Auth,
+	...Profile,
+	...Category,
+	...Product,
+	...ShopperProduct,
+];
 
 GET_DATA.forEach(({ uri, query, param }) => {
 	app.get(uri, (req, res) => {

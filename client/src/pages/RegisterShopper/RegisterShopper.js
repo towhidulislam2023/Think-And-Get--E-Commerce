@@ -20,6 +20,11 @@ const Register = () => {
 
 	const showPosition = (position) => {
 		setAddress(position.coords.latitude + "__" + position.coords.longitude);
+		getValues("shipping_address");
+		setValue(
+			"shipping_address",
+			position.coords.latitude + "__" + position.coords.longitude
+		);
 	};
 	const registerSchema = yup.object().shape({
 		name: yup.string().required("Name is required"),
@@ -31,12 +36,10 @@ const Register = () => {
 			.string()
 			.min(8, "Password must be at least 8 characters")
 			.required("Password is required"),
-		shipping_address: yup
-			.string()
-			.min(3, "Shipping Address must be at least 10 characters"),
+		shipping_address: yup.string(),
 	});
 
-	const { register, handleSubmit, formState } = useForm({
+	const { register, handleSubmit, formState, setValue, getValues } = useForm({
 		resolver: yupResolver(registerSchema),
 	});
 
@@ -136,7 +139,6 @@ const Register = () => {
 											id="shipping_address"
 											placeholder="Enter your Shop Location"
 											{...register("shipping_address")}
-											value={address}
 										/>
 										<p className="text-danger">
 											{errors.shipping_address?.message}
