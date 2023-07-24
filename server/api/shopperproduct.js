@@ -7,7 +7,20 @@ const add = [
 	},
 ];
 
+const read = [
+	{
+		uri: "/shopperproduct/getshopperproduct",
+		query: `SELECT * FROM shopper_product`,
+	},
+	{
+		uri: "/shopperproduct/getshopperproduct/:id",
+		query: `SELECT * FROM shopper_product WHERE id = ?`,
+		param: ["id"],
+	},
+];
+
 // Export modules
 module.exports = Object.freeze({
 	add,
+	read,
 });
