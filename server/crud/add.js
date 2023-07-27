@@ -10,12 +10,15 @@ const { add: Product } = require("../api/product");
 
 const { add: ShopperProduct } = require("../api/shopperproduct");
 
+const { add: Order } = require("../api/order");
+
 const ADD_DATA = [
 	...JobEntry,
 	...Auth,
 	...Category,
 	...Product,
 	...ShopperProduct,
+	...Order,
 ];
 
 ADD_DATA.forEach(({ uri, query, body, msg }) => {

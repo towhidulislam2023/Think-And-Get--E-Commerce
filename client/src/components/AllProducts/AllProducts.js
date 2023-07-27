@@ -17,18 +17,25 @@ const AllProducts = ({ limit }) => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
+	// get userid from local storage
+	const userId = localStorage.getItem("user-id");
+
+	if (userId === null) {
+		window.location.href = "/login";
+	}
+
 	useEffect(() => {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/shopperproduct/getshopperproduct`
 		)
 			.then((response) => {
-				console.log(response.data);
 				setProds(response.data);
 				setLoading(false);
 			})
 			.catch((error) => {
 				setError(error.message);
 				setLoading(false);
+				alert(error);
 			});
 	}, []);
 
@@ -47,7 +54,6 @@ const AllProducts = ({ limit }) => {
 						<div className="all-products-wrapper space-mb-m--20">
 							<div className="row">
 								{prods.map((single) => {
-									console.log(single);
 									const wishlistItem = wishlistItems.find(
 										(wishlistItem) =>
 											wishlistItem.id === single.id
@@ -57,7 +63,11 @@ const AllProducts = ({ limit }) => {
 											className="col-12 col-md-6"
 											key={single.id}
 										>
-											{/* <PostUi key={single.id} wishlistItem={wishlistItem} single={single} ></PostUi> */}
+											<PostUi
+												key={single.id}
+												wishlistItem={wishlistItem}
+												single={single}
+											></PostUi>
 
 											<div className="grid-product space-mb--20">
 												<div className="grid-product__image">
