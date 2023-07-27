@@ -29,9 +29,7 @@ app.post(
 			return res.status(400).json({ msg: "No file uploaded" });
 		} else {
 			console.log(productImage);
-			return res
-				.status(200)
-				.json({ msg: "File Uploaded", productImage });
+			return res.status(200).json({ msg: "File Uploaded", productImage });
 		}
 	}
 );

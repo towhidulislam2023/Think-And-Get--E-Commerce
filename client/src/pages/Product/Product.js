@@ -35,11 +35,9 @@ const Product = () => {
 				setProductImageId(response.data[0]?.product_id);
 			})
 			.catch((error) => {
-				console.log(error);
+				alert(error);
 			});
 	}, [id]);
-
-	console.log(productImageId);
 
 	const { cartItems } = useSelector((state) => state.cart);
 	const { wishlistItems } = useSelector((state) => state.wishlist);
@@ -47,17 +45,16 @@ const Product = () => {
 
 	const productCartQty = getProductCartQuantity(cartItems, prods);
 
+	console.log(cartItems);
+
 	useEffect(() => {
 		Axios.get(
 			`${process.env.REACT_APP_API_URL}/product/getproductimage/${productImageId}`
 		)
 			.then((response) => {
-				console.log(response.data);
 				setProductImageName(response.data[0]?.image);
 			})
-			.catch((error) => {
-				console.log(error);
-			});
+			.catch((error) => {});
 	}, [productImageId]);
 
 	return (
@@ -65,8 +62,6 @@ const Product = () => {
 			{/*====================  product image slider ====================*/}
 			<div className="product-image-slider-wrapper space-pb--30 space-mb--30">
 				{prods.map((single) => {
-					//const imageName1 = "WelcomeScan.jpg";
-					console.log(productImageName);
 					return (
 						<div className="product-image-single swiper-slide">
 							<img
@@ -189,22 +184,26 @@ const Product = () => {
 						: "ADD TO WISHLIST"}
 				</button>
 				{productStock && productStock > 0 ? (
-					<button
-						className="cart"
-						onClick={() =>
-							dispatch(
-								addToCart({
-									...prods,
-									quantity: quantityCount,
-								})
-							)
-						}
-						disabled={productCartQty >= productStock}
-					>
-						{productCartQty >= productStock
-							? "STOCK END"
-							: "ADD TO CART"}
-					</button>
+					prods.map((prods) => {
+						return (
+							<button
+								className="cart"
+								onClick={() =>
+									dispatch(
+										addToCart({
+											...prods,
+											quantity: quantityCount,
+										})
+									)
+								}
+								disabled={productCartQty >= productStock}
+							>
+								{productCartQty >= productStock
+									? "STOCK END"
+									: "ADD TO CART"}
+							</button>
+						);
+					})
 				) : (
 					<button className="cart" disabled>
 						OUT OF STOCK
