@@ -17,6 +17,11 @@ const read = [
 		query: `SELECT * FROM shopper_product WHERE id = ?`,
 		param: ["id"],
 	},
+	{
+		uri: "/shopperproduct/getshopperproductName/:id",
+		query: `SELECT name FROM shopper_product WHERE id in (?)`,
+		param: ["id"],
+	},
 ];
 
 // Export modules
