@@ -43,7 +43,7 @@ class Header extends Component {
 										<img
 											src={
 												process.env.PUBLIC_URL +
-												"/assets/img/Tag-logo-blue-get_60_60.png"
+												"/assets/img/Tag-logo-blue-get_50_50.png"
 											}
 											className="img-fluid"
 											alt=""

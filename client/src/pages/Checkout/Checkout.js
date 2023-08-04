@@ -1,7 +1,7 @@
 import Axios from "axios";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { Breadcrumb } from "../../components";
@@ -14,6 +14,8 @@ const Checkout = () => {
 	const { cartItems } = useSelector((state) => state.cart);
 
 	const id = localStorage.getItem("user-id");
+
+	const dispatch = useDispatch();
 
 	if (id === null) {
 		window.location.href = "/login";
@@ -47,6 +49,13 @@ const Checkout = () => {
 		}
 		console.log(orderedItem);
 	}
+	const settingState = (state) => {
+		dispatch({
+			type: "change",
+			name: state.cart,
+			value: "",
+		});
+	};
 
 	const handleSubmit = () => {
 		console.log(cartItems);
@@ -60,6 +69,8 @@ const Checkout = () => {
 		})
 			.then((response) => {
 				console.log(response.data);
+				alert("Order Placed Successfully");
+				settingState();
 				navigate("/home");
 			})
 			.catch((error) => {
