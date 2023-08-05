@@ -1,16 +1,17 @@
 import React, { lazy, Suspense } from "react";
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Outlet,
+	Outlet,
+	Route,
+	BrowserRouter as Router,
+	Routes,
 } from "react-router-dom";
 
-import { DefaultLayout } from "./layouts";
 import { Preloader } from "./components";
 import ScrollToTop from "./helpers/scroll-top";
+import { DefaultLayout } from "./layouts";
 import AddCatagoryForm from "./pages/AddCatagoryForm/AddCatagoryForm";
 import AddProductForm from "./pages/AddProductForm/AddProductForm";
+import RegisterShopper from "./pages/RegisterShopper/RegisterShopper";
 import ShopperProduct from "./pages/shopperProduct/shopperProduct";
 
 const Welcome = lazy(() => import("./pages/Welcome"));
@@ -32,104 +33,116 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Order = lazy(() => import("./pages/Order"));
 
 function App() {
-    return (
-        <Router>
-            <ScrollToTop>
-                <Suspense fallback={<Preloader />}>
-                    <Routes>
-                        <Route
-                            path={process.env.PUBLIC_URL + "/"}
-                            element={<Welcome />}
-                        />
-                        <Route
-                            path={process.env.PUBLIC_URL + "/welcome"}
-                            element={<Welcome />}
-                        />
-                        <Route
-                            path={process.env.PUBLIC_URL + "/register"}
-                            element={<Register />}
-                        />
-                        <Route
-                            path={process.env.PUBLIC_URL + "/login"}
-                            element={<Login />}
-                        />
-                        <Route
-                            element={
-                                <DefaultLayout>
-                                    {" "}
-                                    <Outlet />{" "}
-                                </DefaultLayout>
-                            }
-                        >
-                            <Route
-                                path={process.env.PUBLIC_URL + "/home"}
-                                element={<Home />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/shop"}
-                                element={<Shop />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/product/:id"}
-                                element={<Product />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/chat"}
-                                element={<Chat />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/cart"}
-                                element={<Cart />}
-                            />
-                            {/* TODO: Delete This After Work done  */}
-                            <Route
-                                path={process.env.PUBLIC_URL + "/ShopperProduct"}
-                                element={<ShopperProduct></ShopperProduct>}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/addproduct"}
-                                element={<AddProductForm></AddProductForm>}
-                            />
-                            {/* TODO: need DELETE OR REMOVE EXTRA THIS CODE  */}
-                            <Route
-                                path={process.env.PUBLIC_URL + "/wishlist"}
-                                element={<Wishlist />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/checkout"}
-                                element={<Checkout />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/search"}
-                                element={<Search />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/profile"}
-                                element={<Profile />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/edit-profile"}
-                                element={<EditProfile />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/notification"}
-                                element={<Notification />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/contact"}
-                                element={<Contact />}
-                            />
-                            <Route
-                                path={process.env.PUBLIC_URL + "/order"}
-                                element={<Order />}
-                            />
-                            <Route path="*" element={<NotFound />} />
-                        </Route>
-                    </Routes>
-                </Suspense>
-            </ScrollToTop>
-        </Router>
-    );
+	return (
+		<Router>
+			<ScrollToTop>
+				<Suspense fallback={<Preloader />}>
+					<Routes>
+						<Route
+							path={process.env.PUBLIC_URL + "/"}
+							element={<Welcome />}
+						/>
+						<Route
+							path={process.env.PUBLIC_URL + "/welcome"}
+							element={<Welcome />}
+						/>
+						<Route
+							path={process.env.PUBLIC_URL + "/register"}
+							element={<Register />}
+						/>
+						<Route
+							path={process.env.PUBLIC_URL + "/login"}
+							element={<Login />}
+						/>
+						<Route
+							element={
+								<DefaultLayout>
+									{" "}
+									<Outlet />{" "}
+								</DefaultLayout>
+							}
+						>
+							<Route
+								path={process.env.PUBLIC_URL + "/home"}
+								element={<Home />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/shop"}
+								element={<Shop />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/product/:id"}
+								element={<Product />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/chat"}
+								element={<Chat />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/cart"}
+								element={<Cart />}
+							/>
+							{/* TODO: Delete This After Work done  */}
+							<Route
+								path={process.env.PUBLIC_URL + "/addcategory"}
+								element={<AddCatagoryForm></AddCatagoryForm>}
+							/>
+							<Route
+								path={
+									process.env.PUBLIC_URL + "/ShopperProduct"
+								}
+								element={<ShopperProduct></ShopperProduct>}
+							/>
+							<Route
+								path={
+									process.env.PUBLIC_URL + "/registershopper"
+								}
+								element={<RegisterShopper></RegisterShopper>}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/addproduct"}
+								element={<AddProductForm></AddProductForm>}
+							/>
+							{/* TODO: need DELETE OR REMOVE EXTRA THIS CODE  */}
+							<Route
+								path={process.env.PUBLIC_URL + "/wishlist"}
+								element={<Wishlist />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/checkout"}
+								element={<Checkout />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/search"}
+								element={<Search />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/profile"}
+								element={<Profile />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/edit-profile"}
+								element={<EditProfile />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/notification"}
+								element={<Notification />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/contact"}
+								element={<Contact />}
+							/>
+							<Route
+								path={process.env.PUBLIC_URL + "/order"}
+								element={<Order />}
+							/>
+							<Route path="*" element={<NotFound />} />
+						</Route>
+					</Routes>
+				</Suspense>
+			</ScrollToTop>
+		</Router>
+	);
 }
 
 export default App;
